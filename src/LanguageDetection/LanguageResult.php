@@ -125,7 +125,7 @@ class LanguageResult implements \JsonSerializable, \IteratorAggregate, \ArrayAcc
         $first = \array_values($this->result)[0];
 
         return new LanguageResult(\array_filter($this->result, function ($value) use ($first) {
-            return ($first - $value) <= self::THRESHOLD ? true : false;
+            return ($first - $value) <= self::THRESHOLD;
         }));
     }
 
@@ -142,7 +142,7 @@ class LanguageResult implements \JsonSerializable, \IteratorAggregate, \ArrayAcc
      * @param int|null $length
      * @return LanguageResult
      */
-    public function limit(int $offset, int $length = null): LanguageResult
+    public function limit(int $offset, int|null $length = null): LanguageResult
     {
         return new LanguageResult(\array_slice($this->result, $offset, $length));
     }
